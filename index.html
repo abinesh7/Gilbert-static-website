@@ -14,47 +14,54 @@
       background: #000;
     }
 
-    /* Hero image full page */
+    /* Hero image full page using <img> */
     .hero {
       height: 100vh;
       width: 100%;
-      background: url('images/hero.jpg')   no-repeat center center;
-      background-size: cover; /* keep full image visible */
-      background-color: #000;   /* fill gaps with black */
       position: relative;
+      overflow: hidden;
+    }
+
+    .hero img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
     /* Contact popup block */
-    
-.contact-popup {
-  position: fixed;
-  left: 50%;
-  bottom: -200px; /* hidden below */
-  transform: translateX(-50%);
-  text-align: center;
-  color: #fff;
-  opacity: 0;
-}
+    .contact-popup {
+      position: fixed;
+      left: 50%;
+      bottom: -200px; /* hidden below */
+      transform: translateX(-50%);
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+    }
+
     .contact-popup h2 {
       font-size: 2rem;
       margin: 0 0 10px;
     }
 
-.contact-popup a {
-  color: #37353E;       /* lighter pink */
-  font-weight: 400;     /* normal weight instead of bold */
-  text-decoration: none;
-}
+    .contact-popup a {
+      color: #37353E;
+      font-weight: 400;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 
   <!-- Hero -->
-  <section class="hero"></section>
+  <section class="hero">
+    <img src="images/hero.jpg" alt="Logo">
+  </section>
 
   <!-- Contact Animated -->
   <div class="contact-popup" id="popup">
-    
     <p><a href="mailto:gilbertsanjagu@tissueboat.com">gilbertsanjagu@tissueboat.com</a></p>
   </div>
 
@@ -62,35 +69,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
   <script>
     const popup = document.getElementById('popup');
-let shown = false;
+    let shown = false;
 
-window.addEventListener('scroll', () => {
-  const triggerPoint = window.innerHeight * 0.25; // 25% scroll
+    window.addEventListener('scroll', () => {
+      const triggerPoint = window.innerHeight * 0.25;
 
-  if (window.scrollY > triggerPoint && !shown) {
-    anime({
-      targets: popup,
-      bottom: '25%',   // move to 25% from bottom
-      opacity: 1,
-      easing: 'easeOutExpo',
-      duration: 1200
+      if (window.scrollY > triggerPoint && !shown) {
+        anime({
+          targets: popup,
+          bottom: '25%',
+          opacity: 1,
+          easing: 'easeOutExpo',
+          duration: 1200
+        });
+        shown = true;
+      }
     });
-    shown = true;
-  }
-  
-  
-});
 
-window.addEventListener('load', () => {
-  anime({
-    targets: popup,
-    bottom: '15%',
-    opacity: 1,
-    easing: 'easeOutExpo',
-    duration: 1500,
-    delay: 500 // half a second delay
-  });
-});
+    window.addEventListener('load', () => {
+      anime({
+        targets: popup,
+        bottom: '15%',
+        opacity: 1,
+        easing: 'easeOutExpo',
+        duration: 1500,
+        delay: 500
+      });
+    });
   </script>
 
 </body>
